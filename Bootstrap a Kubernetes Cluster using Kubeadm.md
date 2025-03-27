@@ -264,6 +264,7 @@ Start kubeadm only on **master**
 ```
 kubeadm init --ignore-preflight-errors=all
 ```
+
 If the it runs successfully, it will provide a join command which can be used to join the master. Make a note of the highlighted part.
 Run the following commands to configure kubectl on master.
 ```
@@ -274,11 +275,9 @@ chown $(id -u):$(id -g) $HOME/.kube/config
  
 ### Task 4: Joining a Cluster
 
+Paste the copied join token on both the worker nodes.
+![image](https://github.com/user-attachments/assets/9ade88ed-1a7f-4ef5-8700-7fbc2d12cdc3)
 
-Run the kubeadm join command in **worker nodes**, that was previously noted from the master node in the previous task.
-```
-kubeadm join --token <your_token> --discovery-token-ca-cert- hash <your_discovery_token> 
-```
 **Note
 If you want to list and generate tokens again to join worker nodes, then follow the below steps(optional)
 ```
@@ -308,12 +307,23 @@ View all Pods including system Pods and see that dns and weave are running.
 ```
 kubectl get pod -n kube-system
 ```
+Note**
+Make sure both the worker nodes have one core-dns pod.
+If not: Run the following commands
+```
+kubectl get pods -A -o wide
+```
+```
+kubectl delete pod <corednspodname>
+```
+Repeat for both pods
+Now Verify:
+```
+kubectl get pods -A -o wide
+```
+![image](https://github.com/user-attachments/assets/455d4d49-9939-4ad8-9ccc-2cf6ec12892b)
 
 ### Task 6: Create Pods
-To check the API version of any resource
-```
-kubectl api-resources
-```
 
 Create a Pod called pod1 based on a Docker image httpd on the master.
 ```
