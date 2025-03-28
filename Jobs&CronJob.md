@@ -113,6 +113,12 @@ kubectl describe cronjobs
 ```
 To edit the running cronjob
 ```
-kubectl edit cronjob <cronjob-name>
+kubectl delete cronjob cronjob-hello
+```
+```
+kubectl get cronjobs
+```
+```
+kubectl get pod
 ```
 To generate CronJob schedule expressions, you can also use web tools like https://crontab.guru/
