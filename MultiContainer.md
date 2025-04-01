@@ -105,4 +105,6 @@ cat completed.txt
 ```
 exit
 ```
-
+```
+kubectl delete pod init-pod
+```
