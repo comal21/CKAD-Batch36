@@ -34,7 +34,9 @@ kubectl exec -it sidecar-pod -c sidecar-container -- sh
 ``` 
 curl 'http://localhost:80/'
 ```
-
+```
+kubectl delete pod sidecar-pod
+```
 
 ### Task 2: Init container
 ```
