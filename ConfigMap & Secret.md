@@ -120,16 +120,12 @@ exit
 
 
 ### Task 3: Inject `PARTICULAR` variables from ConfigMaps(FromLiteral) into POD.
-Create a ConfigMap
-```
-kubectl create cm cm-1 --from-literal=db_user=admin --from-literal=db_pwd=1234
-```
 ```
 kubectl get cm cm-1 -o yaml
 ```
 Inject particular variable from the ConfigMap into the Pod Yaml File
 ```
-vi env.yaml
+vi particular.yaml
 ```
 ```yaml
 apiVersion: v1
@@ -152,7 +148,7 @@ spec:
           key: db_pwd
 ```
 ```
-kubectl apply -f env.yaml
+kubectl apply -f particular.yaml
 ```
 ```
 kubectl describe pod web-pod
