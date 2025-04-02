@@ -133,11 +133,11 @@ kind: Pod
 metadata:
   labels:
     app: web
-  name: web-pod
+  name: web-pod1
 spec:
   containers:
   - image: httpd
-    name: ctr-1
+    name: ctr
     ports:
     - containerPort: 80
     env:
@@ -155,7 +155,7 @@ kubectl describe pod web-pod
 ```
 Enter the pod and check if the variable has been passed correctly or not
 ```
-kubectl exec -it web-pod -- sh
+kubectl exec -it web-pod1 -- sh
 ```
 ```
 env | grep db_
