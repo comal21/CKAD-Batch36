@@ -401,4 +401,8 @@ echo $password
 ```
 exit
 ```
+Cleanup
+```
+kubectl delete pod --all -n default
+```
 
