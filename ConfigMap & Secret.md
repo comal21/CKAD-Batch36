@@ -218,26 +218,16 @@ exit
 ### Task 5 : Injecting ConfigMap as volume mount
 ConfigMaps consumed as environment variables are not updated automatically and require a pod restart. The challenge is resolved using volume mounts. When a ConfigMap currently consumed in a volume is updated, projected keys are eventually updated as well. The kubelet checks whether the mounted ConfigMap is fresh on every periodic sync. 
 
-Create a file
-```
-vi token
-```
-```
-This is CKAD Training. We are practicing Injecting variables from ConfigMaps(FromFile) into POD.
-```
-Create a ConfigMap
-```
-kubectl create cm cm-1 --from-file=token        
-```
+ConfigMap
 ```
 kubectl get cm
 ```
 ```
-kubectl describe cm cm-1
+kubectl describe cm cm-2
 ```
 Inject as volume mount
 ```
-vi env.yaml
+vi cmvolume.yaml
 ```
 ```yaml
 apiVersion: v1
@@ -245,12 +235,12 @@ kind: Pod
 metadata:
   labels:
     app: web
-  name: web-pod
+  name: volume-pod
 spec:
   volumes:
   - name: cm-volume
     configMap:
-      name: cm-1
+      name: cm-2
   containers:
   - image: httpd
     name: ctr-1
@@ -262,14 +252,14 @@ spec:
 
 ```
 ```
-kubectl apply -f env.yaml
+kubectl apply -f cmvolume.yaml
 ```
 ```
-kubectl describe pod web-pod
+kubectl describe pod volume-pod
 ```
 Enter the pod and check if the variable has been passed correctly or not
 ```
-kubectl exec -it web-pod -- sh
+kubectl exec -it volume-pod -- sh
 ```
 ```
 cd /app && cat token
@@ -286,17 +276,17 @@ Add the below sentence at the end of the existing one.
 Now I have updated my configmap.
 ```
 ```
-kubectl delete cm cm-1
+kubectl delete cm cm-2
 ```
 ```
-kubectl create cm cm-1 --from-file=token
+kubectl create cm cm-2 --from-file=token
 ```
 ```
-kubectl get cm cm-1 -o yaml
+kubectl get cm cm-2 -o yaml
 ```
 Exec into the pod and check out the variable now
 ```
-kubectl exec -it web-pod -- sh
+kubectl exec -it volume-pod -- sh
 ```
 ```
 cd /app && cat token
