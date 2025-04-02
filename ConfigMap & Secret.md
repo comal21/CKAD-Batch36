@@ -85,7 +85,7 @@ kubectl get cm cm-1 -o yaml
 
 Inject the ConfigMap into the Pod Yaml File
 ```
-vi env.yaml
+vi envfrom.yaml
 ```
 ```yaml
 apiVersion: v1
@@ -105,7 +105,7 @@ spec:
         name: cm-1
 ```
 ```
-kubectl apply -f env.yaml
+kubectl apply -f envfrom.yaml
 ```
 Enter the pod and check if the variable has been passed correctly or not
 ```
