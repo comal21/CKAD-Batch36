@@ -107,6 +107,12 @@ kubectl apply -f rq3.yaml
 ```
 kubectl describe ns ns1
 ```
+```
+kubectl delete po pod1 -n ns1
+```
+```
+kubectl delete po pod2 -n ns1
+```
 Try and create a pod in the namespace. 
 ```
 kubectl -n ns1 run pod4 --image nginx --port 80
@@ -171,4 +177,6 @@ spec:
 ```
 kubectl apply -f rq5.yaml
 ```
-
+```
+kubectl delete ns ns1
+```
