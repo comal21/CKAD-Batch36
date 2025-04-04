@@ -31,10 +31,6 @@ In your shell, list the running processes:
 ```
 ps aux
 ```
-In your shell, view the status for process 1:
-```
-cd /proc/1 && cat status
-```
 Inside the pod, you can try to manipulate network-related settings, which require NET_ADMIN capability.
 ```
 ip link set dev eth0 down
@@ -72,10 +68,6 @@ kubectl apply -f security-context-4.yaml
 ```
 ```
 kubectl exec -it security-context-pod4 -- sh
-```
-In your shell, view the capabilities for process 1:
-```
-cd /proc/1 && cat status
 ```
 
 Inside the pod, you can try to manipulate network-related settings, which require NET_ADMIN capability.
