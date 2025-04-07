@@ -10,11 +10,56 @@ kubectl create ns ns2
 ```
 Create pod in first namespace
 ```
-kubectl -n ns1 run ns1-pod --image nginx 
+vi ns1-pod.yml
+```
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ns1-pod
+  namespace: ns1
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    command: ["sh"]
+    args: ["-c", "sleep 3600"]
+    securityContext:
+      capabilities:
+        add: ["NET_RAW"]
+```
+```
+kubectl apply -f ns1-pod.yml
 ```
 Create pod in second namespace
 ```
-kubectl -n ns2 run ns2-pod --image nginx 
+vi ns2-pod.yml
+```
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ns2-pod
+  namespace: ns2
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    command: ["sh"]
+    args: ["-c", "sleep 3600"]
+    securityContext:
+      capabilities:
+        add: ["NET_RAW"]
+```
+```
+kubectl apply -f ns2-pod.yml
+```
+Fetch the Pod IPs
+```
+kubectl get pods -n ns1 -o wide
+```
+```
+kubectl get pods -n ns1 -o wide
 ```
 Enter the pod in first namespace  and check its connectivity with a pod in second namespace
 ```
@@ -22,13 +67,11 @@ kubectl exec -it -n ns1 ns1-pod -- sh
 ```
 Ping with the IP address of second pod
 ```
-apt update && apt install iputils-ping
+apk add iputils  
 ```
 ```
 ping -c 3 <Ip Address of second pod>
 ```
-![image](https://github.com/user-attachments/assets/6b9510b8-174a-4aed-b948-5ea6ad9500ff)
-
 ```
 exit
 ```
@@ -38,13 +81,11 @@ kubectl -n ns2 exec -it ns2-pod -- sh
 ```
 Ping with the IP address of first pod
 ```
-apt update && apt install iputils-ping
+apk add iputils  
 ```
 ```
 ping -c 3 <Ip Address of first pod>
 ```
-![image](https://github.com/user-attachments/assets/4418c9bc-0c80-4f0c-bd17-ddf7be86971d)
-
 ```
 exit
 ```
@@ -105,7 +146,6 @@ kubectl run --rm -it --image=busybox net-policy
 wget -qO- -T3 http://backend
 ```
 It will show timeout
-![image](https://github.com/user-attachments/assets/e6b5610f-e194-42ca-812d-15d6af420018)
 
 ```
 exit
@@ -146,8 +186,6 @@ kubectl run --rm -it --image=busybox --labels role=frontend net-policy
 ```
 wget -qO- -T3 http://backend
 ```
-![image](https://github.com/user-attachments/assets/032a6002-7894-4881-bbbe-0a5e9d341647)
-
 ```
 exit
 ```
@@ -158,7 +196,6 @@ kubectl run --rm -it --image=busybox net-policy
 ```
 wget -qO- -T3 http://backend
 ```
-![image](https://github.com/user-attachments/assets/b8adaa3d-45cf-44d7-b042-7adfbab0e884)
 
 ```
 exit
@@ -178,7 +215,6 @@ curl https://8.8.8.8
 ```
 curl https://yahoo.com
 ```
-![image](https://github.com/user-attachments/assets/160cd45c-70a1-4322-9f1e-1e4d85a5cf47)
 
 ```
 exit
@@ -225,6 +261,5 @@ It can access the IP as it is enabled by the Egress Policy
 curl https://yahoo.com
 ```
 It is not able to access other than mentioned in the EgressPolicy
-![image](https://github.com/user-attachments/assets/83c26cf8-90c8-42b8-8fa6-8fde30602804)
 
 
