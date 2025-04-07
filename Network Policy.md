@@ -59,7 +59,7 @@ Fetch the Pod IPs
 kubectl get pods -n ns1 -o wide
 ```
 ```
-kubectl get pods -n ns1 -o wide
+kubectl get pods -n ns2 -o wide
 ```
 Enter the pod in first namespace  and check its connectivity with a pod in second namespace
 ```
