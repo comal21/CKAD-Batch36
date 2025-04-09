@@ -108,7 +108,7 @@ Execute the below commands to get the user id and password. USe the same to log 
 echo Username: user
 ```
 ```
-echo Password: $(kubectl get secret --namespace default wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
 ```
 To remove a Helm repository from your local Helm client configuration
 ```
