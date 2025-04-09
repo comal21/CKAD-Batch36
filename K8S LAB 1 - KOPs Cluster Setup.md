@@ -112,20 +112,4 @@ Get information about the Kubernetes nodes in the cluster
 ```
 kubectl get nodes
 ```
-To scale out the node, execute the below command. Replace the `nodes-us-east-2a.sirin-2024-03-19-16-03.k8s.local` with the auto-scaling group (master or worker) in your case and also replace `region` with your region. MAke sure the Max capacity of the Auto Scaling Group is above or equal to the number you are trying to scale to.
 
-```
-aws autoscaling update-auto-scaling-group --auto-scaling-group-name nodes-us-east-2a.sirin-2024-03-19-16-03.k8s.local --desired-capacity 3 --region us-east-1
-```
-```
-aws autoscaling update-auto-scaling-group  --auto-scaling-group-name nodes-us-east-2a.sirin-2024-03-19-16-03.k8s.local   --min-size 0  --max-size 0  --region us-east-1
-```
-Run the below command if you are not able to retrieve the data. The below command comes in handy if you have downscaled your cluster and have scaled it up again. 
-```
-kops export kubeconfig --admin
-```
-
-### To delete the cluster
-```
-kops delete cluster --name <clustername> --state s3://<clustername>
-```
