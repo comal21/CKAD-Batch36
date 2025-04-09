@@ -38,9 +38,9 @@ helm search repo wordpress
 To install the WordPress application using the Bitnami Helm chart with the release name my-wordpress
 ```
 helm install my-wordpress bitnami/wordpress
---set mariadb.primary.persistence.enabled=false
---set persistence.enabled=false
---set service.type=NodePort
+  --set mariadb.primary.persistence.enabled=false
+  --set persistence.enabled=false
+  --set service.type=NodePort
 ```
 
 To list all the releases currently installed on your Kubernetes cluster
