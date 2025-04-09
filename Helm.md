@@ -62,7 +62,7 @@ helm upgrade my-wordpress bitnami/wordpress
 ```
 Notice the revision number
 
-If you want to edit the existing hearts, download and exract the chart. To download the Bitnami WordPress Helm chart to your local machine.
+If you want to edit the existing charts, download and exract the chart. To download the Bitnami WordPress Helm chart to your local machine.
 ```
 helm fetch bitnami/wordpress
 ```
