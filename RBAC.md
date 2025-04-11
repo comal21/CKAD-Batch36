@@ -218,9 +218,7 @@ Cluster Role : A ClusterRole is a set of permissions that can be applied across 
 Cluster Role Binding: A ClusterRoleBinding binds a ClusterRole to a set of subjects (users, groups, or service accounts) across the entire cluster. It effectively grants the permissions defined in the ClusterRole to the subjects specified in the binding. Similar to ClusterRoles, ClusterRoleBindings are also cluster-wide and apply across all namespaces.
 
 #### Create a new ServiceAccount
-```
-kubectl create ns ns1
-```
+
 ```
 kubectl create sa -n ns1 sa2
 ```
